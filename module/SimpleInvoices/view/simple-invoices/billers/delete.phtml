@@ -1,0 +1,29 @@
+<div class="page-header">
+	<h1>Delete Biller</h1>
+</div>
+
+<?php if($this->error) : ?>
+<div class="alert alert-danger" role="alert">
+	<strong>Error!</strong>
+	There has been an error while trying to delete the biller.
+</div>
+<?php endif; ?>
+
+<div class="bs-callout bs-callout-danger" id="callout-glyphicons-empty-only"> 
+    <h4>Deleting Biller</h4> 
+    <p>You are about to delete a biller. This operation is not reversible. Please confirm.</p> 
+</div>
+
+<?php
+ $form->setAttribute('action', $this->url('billers', ['action' => 'delete']));
+ $form->prepare();
+ ?>
+ 
+<?= $this->form()->openTag($form); ?>
+    <?= $this->formRow($form->get('id')); ?>                     
+    <?= $this->formRow($form->get('csrf')); ?>
+    
+    <a href="<?= $this->url('billers') ?>" class="btn btn-lg btn-link" role="button">Cancel</a>
+    <?= $this->formSubmit($form->get('submit')); ?>
+<?= $this->form()->closeTag(); ?>
+ 

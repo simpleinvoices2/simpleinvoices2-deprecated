@@ -1,0 +1,66 @@
+
+	<div class="page-header">
+    	<div class='btn-toolbar pull-right'>
+        	<div class='btn-group'>
+          		<a href="<?= $this->url('paymentmethods', ['action' => 'new'])?>" class="btn btn-lg btn-primary pull-right" role="button">New Payment Method</a>
+        	</div>
+      	</div>
+		<h1>Payment Methods</h1>
+	</div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Active</th>
+                    <th>Payment Method</th>
+                    <th>Options</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <?php foreach ($this->paginator as $paymentMethod) : ?>
+                <tr>
+                	<td>
+                		<?php if ($paymentMethod->isEnabled()) : ?>
+                		<i class="fa fa-check" aria-hidden="true"></i>
+                		<span class="sr-only">Enbled</span>
+                		<?php else : ?>
+                		<i class="fa fa-times" aria-hidden="true"></i>
+                		<span class="sr-only">Disabled</span>
+                		<?php endif; ?>
+                	</td>
+                    <td><?= $this->escapeHtml($paymentMethod->getDescription());?></td>
+                    <td>
+                        <div class="options btn-group" style="min-width:100px;">
+                            <a href="<?= $this->url('paymentmethods', ['action' => 'edit'], ['query' => ['id' => $paymentMethod->getId()]]) ?>" class="btn btn-default" role="button">
+                                <i class="fa fa-edit fa-margin"></i> 
+                                <span class="sr-only">Edit</span>
+                            </a>
+                            <a href="<?= $this->url('paymentmethods', ['action' => 'delete'], ['query' => ['id' => $paymentMethod->getId()]]) ?>" class="btn btn-default" role="button">
+                                <i class="fa fa-trash-o fa-margin"></i> 
+                                <span class="sr-only">Delete</span>                
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    
+    <?php
+ // add at the end of the file after the table
+ echo $this->paginationControl(
+     // the paginator object
+     $this->paginator,
+     // the scrolling style
+     'sliding',
+     // the partial to use to render the control
+     'partial/paginator.phtml',
+     // the route to link to when a user clicks a control link
+     array(
+         'route' => 'paymentmethods'
+     )
+ );
+ ?>

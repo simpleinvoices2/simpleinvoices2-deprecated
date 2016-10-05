@@ -1,0 +1,46 @@
+<div class="page-header">
+	<h1>Edit Payment Method</h1>
+</div>
+
+<?php if ($this->error) : ?>
+	<div class="alert alert-danger" role="alert">
+		<strong>Error!</strong>
+		The has been an error while trying to save the payment method.
+	</div>
+<?php endif; ?>
+
+<?php
+ $form->setAttribute('action', $this->url('paymentmethods', ['action' => 'edit']));
+ $form->prepare();
+ ?>
+
+<?= $this->form()->openTag($form); ?>
+    <div class="form-group">
+    	<div class="row">
+        	<div class="col-xs-12 col-sm-3 text-right text-left-xs">
+            	<?= $this->formLabel($form->get('description')); ?>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+            	<?= $this->formElement($form->get('description')); ?>
+            </div>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <div class="row">
+        	<div class="col-xs-12 col-sm-3 text-right text-left-xs">
+            	<?= $this->formLabel($form->get('enabled')); ?>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+            	<?= $this->formElement($form->get('enabled')); ?>
+            </div>
+        </div>
+    </div>
+    
+    <?= $this->formRow($form->get('id')); ?>                     
+    <?= $this->formRow($form->get('csrf')); ?>
+    
+    
+    <a href="<?= $this->url('paymentmethods') ?>" class="btn btn-lg btn-link" role="button">Cancel</a>
+    <?= $this->formSubmit($form->get('submit')); ?>
+<?= $this->form()->closeTag(); ?>

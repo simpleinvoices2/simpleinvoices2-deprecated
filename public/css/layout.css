@@ -1,0 +1,13 @@
+body {
+	margin-top: 55px;
+}
+
+.table td {
+    vertical-align: middle !important;
+}
+
+@media (max-width: 768px) {
+	.text-left-xs {
+    	text-align: left;
+	}
+}

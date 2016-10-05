@@ -1,0 +1,71 @@
+
+	<div class="page-header">
+    	<div class='btn-toolbar pull-right'>
+        	<div class='btn-group'>
+          		<a href="<?= $this->url('billers', ['action' => 'new'])?>" class="btn btn-lg btn-primary pull-right" role="button">New Biller</a>
+        	</div>
+      	</div>
+		<h1>Billers</h1>
+	</div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Biller Name</th>
+                    <th>Email Address</th>
+                    <th>Phone Number</th>
+                    <th>Mobile Phone Number</th>
+                    <th>Active</th>
+                    <th>Options</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <?php foreach ($this->paginator as $biller) : ?>
+                <tr>
+                    <td><?= $this->escapeHtml($biller->getName());?></td>
+                    <td><?= $this->escapeHtml($biller->getEmailAddress());?></td>
+                    <td><?= $this->escapeHtml($biller->getPhone());?></td>
+                    <td><?= $this->escapeHtml($biller->getMobilePhone());?></td>
+                    <td>
+                    	<?php if ($biller->isEnabled()) : ?>
+                    	Yes
+                    	<?php else: ?>
+                    	No
+                    	<?php endif; ?>
+                    </td>
+                    <td>
+                        <div class="options btn-group" style="min-width:100px;">
+                            <a href="<?= $this->url('billers', ['action' => 'edit'], ['query' => ['id' => $biller->getId()]]) ?>" class="btn btn-default" role="button">
+                                <i class="fa fa-edit fa-margin"></i> 
+                                <span class="sr-only">Edit</span>
+                            </a>
+                            <a href="<?= $this->url('billers', ['action' => 'delete'], ['query' => ['id' => $biller->getId()]]) ?>" class="btn btn-default" role="button">
+                                <i class="fa fa-trash-o fa-margin"></i> 
+                                <span class="sr-only">Delete</span>                
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    
+    <?php
+ // add at the end of the file after the table
+ /*echo $this->paginationControl(
+     // the paginator object
+     $this->paginator,
+     // the scrolling style
+     'sliding',
+     // the partial to use to render the control
+     'partial/paginator.phtml',
+     // the route to link to when a user clicks a control link
+     array(
+         'route' => 'taxrates'
+     )
+ );
+ */
+ ?>
